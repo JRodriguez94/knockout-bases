@@ -1,0 +1,77 @@
+<!-- | Ejersicio I -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="knockout-app" class="card">
+        <header>Contador chirondongo</header>
+        <div class="card-section">
+            <h2>Hola, <span data-bind="text: firstName"></span> </h2>
+            <p>Cuantas veces te la ha pelado el Mike ultimamente?</p>
+            <div class="counter-ui-container">
+                <button data-bind="click: decrementar">-</button>
+                <span class="counter" data-bind="text: contador">0</span>
+                <button data-bind="click: incrementar">+</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <span>Ten un buen día!</span>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="knockout-app" class="card">
+        <header>Hola</header>
+        <div class="card-section">
+            <h2>Tabla de elementos</h2>
+            <p>
+                Estos son los activos con lo que se trabajan.
+            </p>
+
+            <button data-bind="click: addItem">+ Agregar</button>
+            <ul class="counter-ui-container" data-bind="foreach: inventory">
+                <li>
+                    <span>
+                        <span data-bind="class: $data.icon"></span>
+                        <span data-bind="class: $data.text"></span>
+                    </span>
+                    <span>
+                        <button data-bind="click: $parent.removeItem, attr: {'item-index': $index}">
+                            &times;
+                        </button>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <footer>
+            <span>Esto es un footer :D</span>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
