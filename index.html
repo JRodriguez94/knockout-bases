@@ -45,7 +45,9 @@
 <body>
 
     <div id="knockout-app" class="card">
-        <header>Hola</header>
+        
+        <!-- | --------------------------------------- -->
+        <!-- <header>Hola</header>
         <div class="card-section">
             <h2>Tabla de elementos</h2>
             <p>
@@ -63,13 +65,15 @@
                         <button data-bind="click: $parent.removeItem, attr: {'item-index': $index}">
                             &times;
                         </button>
+                        <button data-bind="click: $root.fdRemove">
+                            R
+                        </button>
                     </span>
                 </li>
             </ul>
-        </div>
-        <footer>
-            <span>Esto es un footer :D</span>
-        </footer>
+        </div> -->
+        <!-- | --------------------------------------- -->
+
 
 
         <!-- ? ----------------------------------------------- -->
@@ -89,9 +93,8 @@
                     <td data-bind="text: name"></td>
                     <td data-bind="text: price"></td>
                     <td>
-                        <!-- <button class="btn btn-primary">Borrar</button>
-                            <button class="btn btn-danger">Editar</button> -->
-                         <fd-custom-button params="buttonText: 'Borrar', value: id, click: self.perro"></fd-custom-button>
+                        
+                         <fd-custom-button params="buttonText: 'Borrar', value: id, 'action': fdOnRemove"></fd-custom-button>
                          <fd-custom-button params="buttonText: 'Editar', value: id, 'toggle': 'modal', 'target': '#exampleModal'"></fd-custom-button>
                          <!-- <fd-custom-button params="buttonText: 'Editar', value: id, attr: {'data-toggle': 'modal', 'data-target': '#exampleModal'}"></fd-custom-button> -->
                     </td>

@@ -28,14 +28,13 @@ document.querySelector("#knockout-app")) */
 function InventoryViewModel() {
     var self = this;
 
-    self.ptm = "Puta madre no sale"
 
-    var iconTypes = [
+    /* var iconTypes = [
         { icon: "icon-bone", text: "Bone" },
         { icon: "icon-ball", text: "Ball" },
         { icon: "icon-circle", text: "Circle" },
         { icon: "icon-rabbit", text: "Rabbit" },
-    ]
+    ] */
 
     var fdElements = [
         { id: 1, name: "Producto 1", price: 200 },
@@ -45,28 +44,30 @@ function InventoryViewModel() {
         { id: 5, name: "Producto 5", price: 1000 },
     ]
 
-    self.inventory = ko.observableArray([]);
+    // self.inventory = ko.observableArray([]);
     self.fdItemsList = ko.observableArray(fdElements)
 
 
-    self.addItem = () => {
+    /* self.addItem = () => {
         var index = Math.floor(Math.random() * iconTypes.length);
         self.inventory.push(iconTypes[index]);
-    }
+    } */
 
-    self.removeItem = (data, event) => {
-        console.log("Perro removido")
-        /* var indexToRemove = event.target.getAttribute("item-index");
+    /* self.removeItem = (data, event) => {
+        // console.log("Perro removido")
+        var indexToRemove = event.target.getAttribute("item-index");
         console.log(indexToRemove)
-        self.inventory.splice(indexToRemove, 1); */
-    }
+        self.inventory.splice(indexToRemove, 1);
+    } */
 
-    self.onNewItems = function(newItems) {
+    /* self.onNewItems = function(newItems) {
         self.items(newItems)
-    }
+    } */
 
-    self.perro = function(callback) {
-        console.log("Perrillo")
+    // * ----------------------------------- 
+
+    self.fdOnRemove = function(index) {
+        console.log("fdOnRemove Index(? ", index);
     }
 
 };
@@ -80,18 +81,20 @@ ko.components.register('fd-custom-button', {
         '</button>'
     ].join(''),
     viewModel: function(params) {
+        
         var self = this;
         self.buttonText = params.buttonText;
         self.cButtonClass = ko.observable("");
         self.cButtonValue = ko.observable(0);
 
-        console.log("Togle(?", params.toggle)
+        // | ----------------------------------------
+        // ? ------------- ATRIBUTOS ----------------
+        /* console.log("Togle(?", params.toggle)
         console.log("Target(?", params.target)
-
+        
         self.fdtoggle = ko.observable(params.toggle)
-        self.fdtarget = ko.observable(params.target)
-
-        // console.log("Valor de button antes de asignarse: ", params.value)
+        self.fdtarget = ko.observable(params.target) */
+        // | ----------------------------------------
 
         self.cButtonValue = params.value;
 
@@ -104,17 +107,12 @@ ko.components.register('fd-custom-button', {
             case 'Cancelar': { self.cButtonClass('btn btn-warning'); break; }
         }
 
-        self.onClick = function(params) {
-
-            /* | No es accesible el obserbavle array desde aqui y no me deja acceder a las funciones
-            del viewModel tampo. Quizas lo mejor es investigar porque no me esta dejando
-            acceder a las funciones del viewModel */
-
-            console.log("Params: ", params)
+        self.onClick = function() {
 
             switch(self.buttonText) {
                 case 'Borrar': { 
                     console.log("Valor del index desde el onClick: de Borrar", self.cButtonValue);
+                    params.fdOnRemove(7);
                     break; 
                 }
                 case 'Editar': { 
