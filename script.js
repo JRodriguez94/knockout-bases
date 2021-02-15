@@ -28,6 +28,8 @@ document.querySelector("#knockout-app")) */
 function InventoryViewModel() {
     var self = this;
 
+    self.ptm = "Puta madre no sale"
+
     var iconTypes = [
         { icon: "icon-bone", text: "Bone" },
         { icon: "icon-ball", text: "Ball" },
@@ -35,8 +37,17 @@ function InventoryViewModel() {
         { icon: "icon-rabbit", text: "Rabbit" },
     ]
 
-    self.inventory = ko.observableArray([
-    ]);
+    var fdElements = [
+        { id: 1, name: "Producto 1", price: 200 },
+        { id: 2, name: "Producto 2", price: 400 },
+        { id: 3, name: "Producto 3", price: 600 },
+        { id: 4, name: "Producto 4", price: 800 },
+        { id: 5, name: "Producto 5", price: 1000 },
+    ]
+
+    self.inventory = ko.observableArray([]);
+    self.fdItemsList = ko.observableArray(fdElements)
+
 
     self.addItem = () => {
         var index = Math.floor(Math.random() * iconTypes.length);
@@ -44,11 +55,87 @@ function InventoryViewModel() {
     }
 
     self.removeItem = (data, event) => {
-        var indexToRemove = event.target.getAttribute("item-index");
+        console.log("Perro removido")
+        /* var indexToRemove = event.target.getAttribute("item-index");
         console.log(indexToRemove)
-        self.inventory.splice(indexToRemove, 1);
+        self.inventory.splice(indexToRemove, 1); */
     }
+
+    self.onNewItems = function(newItems) {
+        self.items(newItems)
+    }
+
+    self.perro = function(callback) {
+        console.log("Perrillo")
+    }
+
 };
 
+
+ko.components.register('fd-custom-button', {
+    template: [
+        '<button data-bind="click: onClick, class: cButtonClass">',
+            '<span data-bind="text: buttonText"></span>',
+            // '<span data-bind="text: buttonText, attr: {'data-toggle': fdtoggle, 'data-target': fdtarget}"></span>',
+        '</button>'
+    ].join(''),
+    viewModel: function(params) {
+        var self = this;
+        self.buttonText = params.buttonText;
+        self.cButtonClass = ko.observable("");
+        self.cButtonValue = ko.observable(0);
+
+        console.log("Togle(?", params.toggle)
+        console.log("Target(?", params.target)
+
+        self.fdtoggle = ko.observable(params.toggle)
+        self.fdtarget = ko.observable(params.target)
+
+        // console.log("Valor de button antes de asignarse: ", params.value)
+
+        self.cButtonValue = params.value;
+
+        console.log("Este es el valor de buttonText: ", self.cButtonValue)
+
+        switch(self.buttonText) {
+            case 'Borrar': { self.cButtonClass('btn btn-danger'); break; }
+            case 'Editar': { self.cButtonClass('btn btn-info');  break; }
+            case 'Aceptar': { self.cButtonClass('btn btn-success'); break; }
+            case 'Cancelar': { self.cButtonClass('btn btn-warning'); break; }
+        }
+
+        self.onClick = function(params) {
+
+            /* | No es accesible el obserbavle array desde aqui y no me deja acceder a las funciones
+            del viewModel tampo. Quizas lo mejor es investigar porque no me esta dejando
+            acceder a las funciones del viewModel */
+
+            console.log("Params: ", params)
+
+            switch(self.buttonText) {
+                case 'Borrar': { 
+                    console.log("Valor del index desde el onClick: de Borrar", self.cButtonValue);
+                    break; 
+                }
+                case 'Editar': { 
+                    console.log("Valor del index desde el onClick: de Editar", self.cButtonValue); 
+                    break; 
+                }
+                case 'Aceptar': { break; }
+                case 'Cancelar': { break; }
+            }
+            
+        }
+    }
+})
+
+
 const knockoutApp = document.querySelector("#knockout-app");
-ko.applyBindings(new InventoryViewModel(), knockoutApp);
+ko.applyBindings(new InventoryViewModel(self.fdItemsList), knockoutApp);
+
+// ? Esto es para pasar la función que puede tener la logica adicional del componente
+/* const knockoutPerro = document.querySelector('#perro-selector');
+ko.applyBindings(new perrillo(), knockoutPerro); */
+
+// ? Pero si nolo quieres así, es tan simple como esto
+// ko.applyBindings(new onButton());

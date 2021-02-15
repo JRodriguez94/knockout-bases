@@ -107,7 +107,7 @@ h2, p { margin: 0; }
    background: #FFFFFF;
    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.12);
    border-radius: var(--border-radius);
-   max-width: 400px;
+   max-width: 80%;
    margin: 0 auto;
 }
 .card header {
@@ -205,3 +205,8 @@ footer span {
 .icon-ball { background-position: -64px;}
 .icon-circle { background-position: -128px;}
 .icon-rabbit { background-position: -192px;}
+
+
+.fd-tabla {
+   margin: 3em;
+}
