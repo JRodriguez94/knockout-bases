@@ -112,7 +112,7 @@ ko.components.register('fd-custom-button', {
             switch(self.buttonText) {
                 case 'Borrar': { 
                     console.log("Valor del index desde el onClick: de Borrar", self.cButtonValue);
-                    params.fdOnRemove(7);
+                    params.action(params.value);
                     break; 
                 }
                 case 'Editar': { 
@@ -129,7 +129,7 @@ ko.components.register('fd-custom-button', {
 
 
 const knockoutApp = document.querySelector("#knockout-app");
-ko.applyBindings(new InventoryViewModel(self.fdItemsList), knockoutApp);
+ko.applyBindings(new InventoryViewModel(), knockoutApp);
 
 // ? Esto es para pasar la función que puede tener la logica adicional del componente
 /* const knockoutPerro = document.querySelector('#perro-selector');

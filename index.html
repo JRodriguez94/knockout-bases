@@ -93,14 +93,17 @@
                     <td data-bind="text: name"></td>
                     <td data-bind="text: price"></td>
                     <td>
-                        
-                         <fd-custom-button params="buttonText: 'Borrar', value: id, 'action': fdOnRemove"></fd-custom-button>
+
+                         <fd-custom-button params="buttonText: 'Borrar', value: id, 'action': $parent.fdOnRemove"></fd-custom-button>
                          <fd-custom-button params="buttonText: 'Editar', value: id, 'toggle': 'modal', 'target': '#exampleModal'"></fd-custom-button>
-                         <!-- <fd-custom-button params="buttonText: 'Editar', value: id, attr: {'data-toggle': 'modal', 'data-target': '#exampleModal'}"></fd-custom-button> -->
+
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- <fd-custom-button params="buttonText: 'Borrar', value: 77, 'action': $root.fdOnRemove"></fd-custom-button> -->
+
             
             <!-- ? ----------------------------------------------- -->
             
