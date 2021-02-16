@@ -30,29 +30,19 @@ function InventoryViewModel() {
 ko.components.register('fd-custom-button', {
     template: [
         '<button data-bind="click: onClick, class: cButtonClass">',
-            '<span data-bind="text: buttonText"></span>',
-            // '<span data-bind="text: buttonText, attr: {'data-toggle': fdtoggle, 'data-target': fdtarget}"></span>',
+            '<span data-bind="text: cButtonText"></span>',
         '</button>'
     ].join(''),
     viewModel: function(params) {
         
         var self = this;
-        self.buttonText = params.buttonText;
+
+        self.cButtonText = params.cButtonText;
         self.cButtonClass = ko.observable("");
         self.cButtonValue = ko.observable(0);
+        this.cButtonValue = params.value;
 
-        // | ----------------------------------------
-        // ? ------------- ATRIBUTOS ----------------
-        /* console.log("Togle(?", params.toggle)
-        console.log("Target(?", params.target)
-        
-        self.fdtoggle = ko.observable(params.toggle)
-        self.fdtarget = ko.observable(params.target) */
-        // | ----------------------------------------
-
-        self.cButtonValue = params.value;
-
-        switch(self.buttonText) {
+        switch(self.cButtonText) {
             case 'Borrar': { self.cButtonClass('btn btn-danger'); break; }
             case 'Editar': { self.cButtonClass('btn btn-info');  break; }
             case 'Aceptar': { self.cButtonClass('btn btn-success'); break; }
@@ -61,7 +51,7 @@ ko.components.register('fd-custom-button', {
 
         self.onClick = function() {
 
-            switch(self.buttonText) {
+            switch(self.cButtonText) {
                 case 'Borrar': { 
                     params.action(params.value);
                     break; 
