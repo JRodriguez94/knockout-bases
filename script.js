@@ -1,40 +1,8 @@
-/* function CounterViewModel() {
-    var self = this;
-
-    self.firstName = ko.observable();  // Se puede definir el valor desde el princiio (entre comillas)
-    self.firstName("Octavio Rodriguez");
-
-    self.contador = ko.observable(0);
-    // self.contador = 0;
-
-    self.incrementar = () => {
-        var currentValue = self.contador();
-        self.contador(currentValue + 1);
-    }
-
-    self.decrementar = () => {
-        var currentValue = self.contador();
-        if(currentValue > 0)
-            self.contador(currentValue - 1);
-    }
-
-}
-
-ko.applyBindings(new CounterViewModel(),
-document.querySelector("#knockout-app")) */
-
 
 
 function InventoryViewModel() {
+
     var self = this;
-
-
-    /* var iconTypes = [
-        { icon: "icon-bone", text: "Bone" },
-        { icon: "icon-ball", text: "Ball" },
-        { icon: "icon-circle", text: "Circle" },
-        { icon: "icon-rabbit", text: "Rabbit" },
-    ] */
 
     var fdElements = [
         { id: 1, name: "Producto 1", price: 200 },
@@ -44,30 +12,16 @@ function InventoryViewModel() {
         { id: 5, name: "Producto 5", price: 1000 },
     ]
 
-    // self.inventory = ko.observableArray([]);
     self.fdItemsList = ko.observableArray(fdElements)
 
-
-    /* self.addItem = () => {
-        var index = Math.floor(Math.random() * iconTypes.length);
-        self.inventory.push(iconTypes[index]);
-    } */
-
-    /* self.removeItem = (data, event) => {
-        // console.log("Perro removido")
-        var indexToRemove = event.target.getAttribute("item-index");
-        console.log(indexToRemove)
-        self.inventory.splice(indexToRemove, 1);
-    } */
-
-    /* self.onNewItems = function(newItems) {
-        self.items(newItems)
-    } */
-
-    // * ----------------------------------- 
-
     self.fdOnRemove = function(index) {
-        console.log("fdOnRemove Index(? ", index);
+        
+        var lista = self.fdItemsList();
+
+        self.fdItemsList(
+            lista.filter(product => product.id !== index)
+        );
+
     }
 
 };
@@ -98,8 +52,6 @@ ko.components.register('fd-custom-button', {
 
         self.cButtonValue = params.value;
 
-        console.log("Este es el valor de buttonText: ", self.cButtonValue)
-
         switch(self.buttonText) {
             case 'Borrar': { self.cButtonClass('btn btn-danger'); break; }
             case 'Editar': { self.cButtonClass('btn btn-info');  break; }
@@ -111,7 +63,6 @@ ko.components.register('fd-custom-button', {
 
             switch(self.buttonText) {
                 case 'Borrar': { 
-                    console.log("Valor del index desde el onClick: de Borrar", self.cButtonValue);
                     params.action(params.value);
                     break; 
                 }
@@ -127,13 +78,9 @@ ko.components.register('fd-custom-button', {
     }
 })
 
-
+// ? De esta forma se hace instancia de la funcion padre que se pasa como parametro
 const knockoutApp = document.querySelector("#knockout-app");
 ko.applyBindings(new InventoryViewModel(), knockoutApp);
 
-// ? Esto es para pasar la función que puede tener la logica adicional del componente
-/* const knockoutPerro = document.querySelector('#perro-selector');
-ko.applyBindings(new perrillo(), knockoutPerro); */
-
-// ? Pero si nolo quieres así, es tan simple como esto
+// ? Si solo quieres hacer instancia del componente, se puede bindear así
 // ko.applyBindings(new onButton());
