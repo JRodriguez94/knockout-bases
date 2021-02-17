@@ -4,12 +4,18 @@ function InventoryViewModel() {
 
     var self = this;
 
+    function fdItemsModel(id, name, price) {
+        this.id = ko.observable(id);
+        this.name = ko.observable(name);
+        this.price = ko.observable(price);
+    }
+
     var fdElements = [
-        { id: 1, name: "Producto 1", price: 200 },
-        { id: 2, name: "Producto 2", price: 400 },
-        { id: 3, name: "Producto 3", price: 600 },
-        { id: 4, name: "Producto 4", price: 800 },
-        { id: 5, name: "Producto 5", price: 1000 },
+        new fdItemsModel(1, "Producto 1", 200 ),
+        new fdItemsModel(2, "Producto 2", 400 ),
+        new fdItemsModel(3, "Producto 3", 600 ),
+        new fdItemsModel(4, "Producto 4", 800 ),
+        new fdItemsModel(5, "Producto 5", 1000 ),
     ]
 
     self.fdItemsList = ko.observableArray(fdElements)
