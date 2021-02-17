@@ -57,6 +57,8 @@ function InventoryViewModel() {
         lista[indexCurrentE] = self.fdToEditItem();
         self.fdItemsList(lista);
 
+        $('#fd-Modal').modal('hide');
+
         console.log('Nueva self.fdItemsList(? ', self.fdItemsList());
 
     }
