@@ -14,6 +14,17 @@ function InventoryViewModel() {
 
     self.fdItemsList = ko.observableArray(fdElements)
 
+    self.fdToEditItem = ko.observable();
+    self.fdToEditItem( {
+        id: null,
+        name: null,
+        price: null
+    });
+
+
+
+// * --------------------------------------------------
+
     self.fdOnRemove = function(index) {
         
         var lista = self.fdItemsList();
@@ -23,6 +34,42 @@ function InventoryViewModel() {
         );
 
     }
+
+    self.fdOnEdit = function(index) {
+        
+        var lista = self.fdItemsList();
+        var toEditE = lista.filter(product => product.id === index);
+        self.fdToEditItem(toEditE[0])
+
+    }
+
+    self.fdOnSave = function() {
+        
+        var lista = self.fdItemsList();
+        var indexCurrentE = lista.findIndex(product => product.id === self.fdToEditItem().id)
+        
+        lista[indexCurrentE] = self.fdToEditItem();
+        self.fdItemsList(lista);
+
+        console.log('Nueva self.fdItemsList(? ', self.fdItemsList());
+
+    }
+
+// * --------------------------------------------------
+
+
+// | --------------------------------------------------
+
+    self.perroTest = function() {
+        console.log('juan :D')
+    }
+
+    self.SowFdItemsList = function() {
+        console.log("Así está actualmente fdItemsList: ", self.fdItemsList())
+    }
+
+// | --------------------------------------------------
+
 
 };
 
@@ -45,7 +92,7 @@ ko.components.register('fd-custom-button', {
         switch(self.cButtonText) {
             case 'Borrar': { self.cButtonClass('btn btn-danger'); break; }
             case 'Editar': { self.cButtonClass('btn btn-info');  break; }
-            case 'Aceptar': { self.cButtonClass('btn btn-success'); break; }
+            case 'Guardar': { self.cButtonClass('btn btn-success'); break; }
             case 'Cancelar': { self.cButtonClass('btn btn-warning'); break; }
         }
 
@@ -57,10 +104,14 @@ ko.components.register('fd-custom-button', {
                     break; 
                 }
                 case 'Editar': { 
-                    console.log("Valor del index desde el onClick: de Editar", self.cButtonValue); 
+                    // console.log("Valor del index desde el onClick: de Editar", self.cButtonValue); 
+                    params.action(params.value);
                     break; 
                 }
-                case 'Aceptar': { break; }
+                case 'Guardar': {
+                    params.action(); 
+                    break; 
+                }
                 case 'Cancelar': { break; }
             }
             
