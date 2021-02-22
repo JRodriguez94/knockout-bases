@@ -16,6 +16,8 @@ function InventoryViewModel() {
         new fdItemsModel(3, "Producto 3", 600 ),
         new fdItemsModel(4, "Producto 4", 800 ),
         new fdItemsModel(5, "Producto 5", 1000 ),
+        new fdItemsModel(5, "Producto 5", 1000 ),
+        new fdItemsModel(5, "Producto 5", 1000 ),
     ]
 
     self.fdItemsList = ko.observableArray(fdElements)
@@ -83,11 +85,12 @@ function InventoryViewModel() {
 
 
 ko.components.register('fd-custom-button', {
-    template: [
+    /* template: [
         '<button data-bind="click: onClick, class: cButtonClass">',
             '<span data-bind="text: cButtonText"></span>',
         '</button>'
-    ].join(''),
+    ].join(''), */
+    template: { element: 'fd-custom-bttn' },
     viewModel: function(params) {
         
         var self = this;
