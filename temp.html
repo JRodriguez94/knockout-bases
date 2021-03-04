@@ -1,57 +1,10 @@
-<!-- | Ejersicio I -->
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-    <div id="knockout-app" class="card">
-        <header>Contador chirondongo</header>
-        <div class="card-section">
-            <h2>Hola, <span data-bind="text: firstName"></span> </h2>
-            <p>Cuantas veces te la ha pelado el Mike ultimamente?</p>
-            <div class="counter-ui-container">
-                <button data-bind="click: decrementar">-</button>
-                <span class="counter" data-bind="text: contador">0</span>
-                <button data-bind="click: incrementar">+</button>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <span>Ten un buen día!</span>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"></script>
-    <script src="script.js"></script>
-</body>
-</html> -->
+<div id="knockout-app" class="card">
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <script data-main = "js/main" src = "js/libs/require.js"></script>
-
-</head>
-<body>
-
-    <div class="card">
-
-         <!-- ? ----------------------------------------------- -->
+    <!-- ? ----------------------------------------------- -->
     
-     <table class="table fd-tabla table-striped table-bordered" style="width: 80%;">
+    <table class="table fd-tabla table-striped table-bordered" style="width: 80%;">
         <thead>
             <tr>
                 <th>ID</th>
@@ -66,16 +19,16 @@
                 <td data-bind="text: name"></td>
                 <td data-bind="text: price"></td>
                 <td>
-                    <c-button params="cButtonText: 'Borrar', 
+                    <fd-custom-button params="cButtonText: 'Borrar', 
                                               value: id, 
                                               'action': $parent.fdOnRemove">
-                    </c-button>
-                    <c-button params="cButtonText: 'Editar', 
+                    </fd-custom-button>
+                    <fd-custom-button params="cButtonText: 'Editar', 
                                               value: id,
                                               'action': $parent.fdOnEdit"
                                       data-toggle="modal"
                                       data-target="#fd-Modal">
-                    </c-button>
+                    </fd-custom-button>
                 </td>
             </tr>
         </tbody>
@@ -113,19 +66,11 @@
             </div>
             <div class="modal-footer">
 
-            <c-button params="cButtonText: 'Guardar', 'action': fdOnSave""></c-button>
-            <c-button data-dismiss="modal" params="cButtonText: 'Cancelar'"></c-button>
+            <fd-custom-button params="cButtonText: 'Guardar', 'action': fdOnSave""></fd-custom-button>
+            <fd-custom-button data-dismiss="modal" params="cButtonText: 'Cancelar'"></fd-custom-button>
             </div>
         </div>
         </div>
     </div>
-
-
-    <!-- ? ----------------------------------------------- -->
-
-
-    </div>
-    
-
-</body>
-</html>
+        
+</div>
