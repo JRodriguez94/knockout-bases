@@ -1,17 +1,8 @@
-
-
+// ? Definicion del viewModel de c-button
+// * Es ejecutado al ser requerido al registrar
+// * El componente desde el loader
 define(['ko'], ko => {
     var fdCButtonModel = function(params) {
-
-        /* console.log('Esta entrando al fdCButtonModel')
-        
-        let self = this;
-
-        self.onClick = function() {
-            // console.log('On click :D', ko)
-
-            params.action(ko);
-        } */
 
         var self = this;
 
@@ -20,6 +11,8 @@ define(['ko'], ko => {
         self.cButtonValue = ko.observable(0);
         this.cButtonValue = params.value;
 
+        // * Segun el valor de cButtonText pasado como parametro
+        // * Se agrega la clase correspondiente al componente 
         switch(self.cButtonText) {
             case 'Borrar': { self.cButtonClass('btn btn-danger'); break; }
             case 'Editar': { self.cButtonClass('btn btn-info');  break; }
@@ -27,6 +20,8 @@ define(['ko'], ko => {
             case 'Cancelar': { self.cButtonClass('btn btn-warning'); break; }
         }
 
+        // * De la misma forma, dependiendo del parametro
+        // * cButtonText, se ejecuta el caso correspondiente.
         self.onClick = function() {
 
             switch(self.cButtonText) {
@@ -35,7 +30,6 @@ define(['ko'], ko => {
                     break; 
                 }
                 case 'Editar': { 
-                    // console.log("Valor del index desde el onClick: de Editar", self.cButtonValue); 
                     params.action(params.value);
                     break; 
                 }
@@ -49,5 +43,8 @@ define(['ko'], ko => {
         }
         
     }
+
+    // * Se retorna la funcion contenedora
+    // * Para ejecurar el require
     return fdCButtonModel;
 })

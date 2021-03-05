@@ -1,13 +1,28 @@
+
+// ? Esta es la definicion del modulo requerido en el archivo 'Main'
+// * Este es declarado como una funcion anonima y se ejecuta al ser instanciada
+// * (Siendo requerido como en el archivo main)
+// * De la misma forma que al ser requerido, se debe espesificar las depencias 
+// * De las que harán uso. En este caso ko
+// | Al ser definido como una funcion anonima, solo será ejecutado al ser requerido
+// | Por ende, puede ser invocado de otra forma.
 define(['ko'], ko => {
+
+    console.log('Está entrando al define del LOADER')
 
     // | ---------------------------------------------------------
 
+    // ? Definicion y carga de los objetos obervables que serán
+    // ? Utilizados en la vista de la página
+
+    // * Modelo del objeto fdItems (item individual)
     function fdItemsModel(id, name, price) {
         this.id = ko.observable(id);
         this.name = ko.observable(name);
         this.price = ko.observable(price);
     }
 
+    // * Carga de datos de los items
     var fdElements = [
         new fdItemsModel(1, "Producto 1", 200 ),
         new fdItemsModel(2, "Producto 2", 400 ),
@@ -16,8 +31,12 @@ define(['ko'], ko => {
         new fdItemsModel(5, "Producto 5", 1000 ),
     ]
 
+    // * Asifnacion del objeto fdElements a fdItemsList
+    // * El cual será el observableArray con el que se va a trabajar
     self.fdItemsList = ko.observableArray(fdElements)
 
+    // * Declaracion y definicion de objeto auxiliar para
+    // * La edicion de items
     self.fdToEditItem = ko.observable();
     self.fdToEditItem( {
         id: null,
@@ -27,43 +46,37 @@ define(['ko'], ko => {
 
     // | ---------------------------------------------------------
 
-
-
-    console.log('Está entrando al define del LOADER')
-    console.log('Ko desde loader: ', ko)
-
+    // ? Registro del custom component (boton)
+    // * Se define el template y el viewModel del componente
+    // | Recordar anteponer 'text!' antes del path del template
+    // | Esto para que text.js lo pueda transpilar, de otra forma
+    // | No cargara el template y marcará un error
+    // | Omitit la extencion .js del viewModel. Require se lo agrega automaticamente
+    // | De otra forma se duplicara el .js y marcara un error
     ko.components.register('c-button', {
         template: { require: 'text!../modules/fd-cButton/fd-cButton.html' },
         viewModel: { require: '../modules/fd-cButton/fd-cButton' }
-        // template: '<h1>Hola?</h1>'
     });
 
 
+    // ? Se aplica el bindeo tanto de los observables como del registro
+    // ? Del cutom component
+    // * Se pasa como parametro la instancia de la funcion contenedora 
+    // * mainViewModel en este caso, para poder hacer uso de sus metododos
+    // * Desde el el viewModel de los custom components registrados
     ko.applyBindings(new mainViewModel());
-
-    
-    
 
 });
 
-function mainViewModel(ko) {
+
+// ? Funcion que contiene los metodos (más funciones) que serán
+// ? Accedidos desde el viewModel de los custom components
+function mainViewModel() {
    
     var self = this;
 
-    self.onTest = ko => {
-
-        console.log('Hola KO(?', ko)
-    }
-
-
-    // * --------------------------------------------------
-
+    // ? Metodo que elimina el elemento seleccionado de la tabla
     self.fdOnRemove = function(index) {
-
-        /* console.log('Está entrando al self.fdOnRemove :D')
-        console.log('Index(? ', index)
-
-        console.log('self.fdItemsList(? ', fdItemsList()) */
         
         var lista = fdItemsList();
 
@@ -73,6 +86,7 @@ function mainViewModel(ko) {
 
     }
 
+    // ? Metodo que edita el elemento seleccionado de la table
     self.fdOnEdit = function(index) {
         
         var lista = fdItemsList();
@@ -82,6 +96,7 @@ function mainViewModel(ko) {
 
     }
 
+    // ? Metodo que guarda los cambios hechos en el item seleccionaod de la tabla
     self.fdOnSave = function() {
         
         var lista = fdItemsList();
@@ -96,15 +111,9 @@ function mainViewModel(ko) {
 
     }
 
-    // * --------------------------------------------------
-
-
     // | --------------------------------------------------
 
-    self.perroTest = function() {
-        console.log('juan :D')
-    }
-
+    // ? Metodo auxiliar para mostrar el estado actual del array de elementos
     self.SowFdItemsList = function() {
         console.log("Así está actualmente fdItemsList: ", fdItemsList())
     }
